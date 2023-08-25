@@ -3,23 +3,32 @@
 <html lang="en">
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+    <title>Simple Fighting RPG</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="RPG fighting game using dices">
+    <meta name="author" content="Daniel Zhu">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="index.css">
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
-    <main>
-        <div id="hero"></div>
-        <div id="monster"></div>
-    </main>
-    <section id="actions">
-        <button id="attack-button">Attack</button>
-    </section>
-    <script type="module" src="/index.js"></script>
+    <div class="container" id="container">
+        <main>
+            <div id="hero"></div>
+            <div id="monster"></div>
+        </main>
+
+        <div>
+            <button class="attack-button" id="attack-button">Attack</button>
+        </div>
+    </div>
+
+    <script src="index.js" type="module"></script>
 </body>
 
 </html>
