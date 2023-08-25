@@ -14,7 +14,7 @@ body {
 
 .container {
     min-width: 280px;
-    max-width: 600px;
+    max-width: 780px;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -37,8 +37,7 @@ main {
 /* character-card */
 
 .character-card {
-    /* fix width */
-    width: 220px;
+    width: 230px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -63,11 +62,13 @@ main {
     border-radius: 10px;
 }
 
+/* health */
+
 .health {
     align-self: flex-start;
     color: #ccc;
     font-size: 1rem;
-    letter-spacing: 0.05em
+    letter-spacing: 0.05em;
 }
 
 .health b {
@@ -91,12 +92,13 @@ main {
     background-color: #d1435f;
 }
 
+/* dice */
+
 .dice-container {
     width: 100%;
     background-color: #000721;
     display: flex;
     justify-content: center;
-    align-items: center;
     gap: 0.5em;
     border-radius: 0 0 12px 12px;
     padding: 0.5em;
@@ -121,6 +123,8 @@ main {
     background-color: transparent;
 }
 
+/* attack-button */
+
 .attack-button {
     display: block;
     background-color: #fcc02a;
@@ -133,8 +137,21 @@ main {
     padding: 0.5em 1em;
     margin-inline: auto;
     cursor: pointer;
-    outline: none;
 }
+
+.attack-button:hover {
+    opacity: 0.7;
+}
+
+.attack-button:active {
+    transform: scale(0.95);
+}
+
+.attack-button:disabled {
+    pointer-events: none;
+}
+
+/* end-game */
 
 .end-game {
     color: white;
@@ -143,4 +160,61 @@ main {
 
 .end-emoji {
     font-size: 80px;
+}
+
+/* media query */
+
+@media (min-width: 660px) {
+    /* main */
+
+    main {
+        flex-direction: row;
+    }
+
+    /* character-card */
+
+    .character-card {
+        width: 300px;
+        gap: 1.5em;
+        padding: 1.5em;
+    }
+
+    .name {
+        font-size: 1.6rem;
+    }
+
+    .avatar {
+        width: 135px;
+    }
+
+    /* health */
+
+    .health {
+        font-size: 1.4rem;
+    }
+
+    .health-bar-outer {
+        height: 12px;
+    }
+
+    /* dice */
+
+    .dice-container {
+        gap: 1em;
+        padding: 1em;
+    }
+
+    .dice,
+    .placeholder-dice {
+        width: 55px;
+        height: 55px;
+        font-size: 1.4rem;
+        line-height: 55px;
+    }
+
+    /* attack-button */
+
+    .attack-button {
+        font-size: 2rem;
+    }
 }
