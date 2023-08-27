@@ -1,4 +1,4 @@
-const characterData = {
+export default {
     hero: {
         name: "Wizard",
         avatar: "images/wizard.png",
@@ -28,5 +28,3 @@ const characterData = {
         currentDiceScore: []
     }
 }
-
-export default characterData
