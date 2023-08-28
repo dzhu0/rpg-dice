@@ -137,6 +137,7 @@ main {
     padding: 0.5em 1em;
     margin-inline: auto;
     cursor: pointer;
+    user-select: none;
 }
 
 .attack-button:hover {
