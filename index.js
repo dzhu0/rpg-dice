@@ -1,63 +1,60 @@
-import characterData from './data.js'
+import monstersData from './monsters.js'
+import herosData from './heros.js'
 import Character from './Character.js'
 
-let isWaiting = false
-let monstersArray = ["orc", "demon", "goblin"]
-let monster = getNewMonster()
-const wizard = new Character(characterData.hero)
+const attackButtonEl = document.getElementById('attack-button')
 
-document.getElementById('attack-button').addEventListener('click', attack)
+const monstersArray = Object.keys(monstersData)
+const hero = new Character(herosData.wizard)
+let monster = getNewMonster()
 
 render()
 
+attackButtonEl.addEventListener('click', attack)
+
 function render() {
-    document.getElementById('hero').innerHTML = wizard.getCharacterHtml()
+    document.getElementById('hero').innerHTML = hero.getCharacterHtml()
     document.getElementById('monster').innerHTML = monster.getCharacterHtml()
 }
 
 function getNewMonster() {
-    const nextMonsterData = characterData[monstersArray.shift()]
+    const nextMonsterData = monstersData[monstersArray.shift()]
     return nextMonsterData ? new Character(nextMonsterData) : {}
 }
 
 function attack() {
-    if (isWaiting) return
-
-    wizard.setDiceHtml()
+    hero.setDiceHtml()
     monster.setDiceHtml()
-    wizard.takeDamage(monster.currentDiceScore)
-    monster.takeDamage(wizard.currentDiceScore)
+    hero.takeDamage(monster.currentDiceScore)
+    monster.takeDamage(hero.currentDiceScore)
+
     render()
 
-    if (wizard.dead) {
-        endGame()
-    } else if (monster.dead) {
-        isWaiting = true
-        if (monstersArray.length > 0) {
-            setTimeout(() => {
+    if (hero.dead || monster.dead) {
+        attackButtonEl.disabled = true
+        setTimeout(() => {
+            if (hero.dead || !monstersArray.length) {
+                endGame()
+            } else {
+                attackButtonEl.disabled = false
                 monster = getNewMonster()
                 render()
-                isWaiting = false
-            }, 1500)
-        } else {
-            endGame()
-        }
+            }
+        }, 1500)
     }
 }
 
 function endGame() {
-    isWaiting = true
-    const endMessage = wizard.health > 0 ? "The Wizard Wins" :
-        monster.health > 0 ? `The ${monster.name} is Victorious` :
-            "No victors - all creatures are dead"
+    const endMessage = hero.health ? `The ${hero.name} Wins` :
+        monster.health ? `The ${monster.name} is Victorious` :
+            "No victors - both are dead"
 
-    const endEmoji = wizard.health > 0 ? "🔮" : "☠️"
-    setTimeout(() => {
-        document.body.innerHTML = `
-            <div class="end-game">
-                <h2>Game Over</h2> 
-                <h3>${endMessage}</h3>
-                <p class="end-emoji">${endEmoji}</p>
-            </div>`
-    }, 1500)
+    const endEmoji = hero.health ? "🔮" : "☠️"
+
+    document.getElementById("container").innerHTML = `
+        <div class="end-game">
+            <h2>Game Over</h2> 
+            <h3>${endMessage}</h3>
+            <p class="end-emoji">${endEmoji}</p>
+        </div>`
 }

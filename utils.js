@@ -4,8 +4,9 @@ function getDiceRollArray(diceCount) {
     )
 }
 
-const getPercentage = (remainingHealth, maximumHealth) =>
-    (100 * remainingHealth) / maximumHealth
+function getPercentage(remainingHealth, maximumHealth) {
+    return remainingHealth / maximumHealth * 100
+}
 
 function getDicePlaceholderHtml(diceCount) {
     return new Array(diceCount)
